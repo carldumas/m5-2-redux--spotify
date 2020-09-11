@@ -88,6 +88,46 @@ export default combineReducers({
 
 The `keys` that you pass to `combineReducers` become a branch of the state.
 
+```js
+// Using multiple reducers
+function todos(state, action) {
+  switch (action.type) {
+    case "ADD_TODO":
+      return state.concat([action.text]);
+    default:
+      return state;
+  }
+}
+function counter(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+}
+// Alternative: using one reducer for everything
+function reducer(state = { todos: [], count: 0 }, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return {
+        todos: state.todos,
+        count: state.count + 1,
+      };
+    case "ADD_TODO":
+      return {
+        count: state.count,
+        todos: state.todos.concat([action.text]),
+      };
+    default:
+      return state;
+  }
+}
+createStore(reducer, initialState);
+```
+
 ---
 
 # Learn More
