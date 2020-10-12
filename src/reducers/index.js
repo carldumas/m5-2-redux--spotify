@@ -1,5 +1,6 @@
+// Libraries
 import { combineReducers } from 'redux';
-
+// Reducers
 import auth from './auth-reducer';
 import artists from './artists-reducer';
 

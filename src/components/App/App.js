@@ -1,5 +1,6 @@
 // Libraries
 import React from 'react';
+import styled from 'styled-components';
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,7 +17,6 @@ import {
 // Components
 import ArtistRoute from '../ArtistRoute';
 // Styles
-import styled from 'styled-components';
 import GlobalStyles from '../GlobalStyles';
 
 const DEFAULT_ARTIST_ID = '6qqNVTkY8uBg9cP3Jd7DAH';
@@ -27,7 +27,7 @@ const App = () => {
     React.useEffect(() => {
         dispatch(requestAccessToken());
 
-        fetch('/spotify_access_token')
+        fetch('/spotify_access_token', { method: 'GET' })
             .then((res) => res.json())
             .then((json) => {
                 // console.log(json);
@@ -43,7 +43,7 @@ const App = () => {
         <Router>
             <Wrapper>
                 <Switch>
-                    <Route path="/artists/:id">
+                    <Route path="/artists/:artistId">
                         <ArtistRoute />
                     </Route>
                     <Redirect to={`/artists/${DEFAULT_ARTIST_ID}`} />
